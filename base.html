@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Biblioteca KeyDB{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar"><div class="container nav"><a class="brand" href="{{ url_for('inicio') }}"> Mi Biblioteca</a><span>Flask + KeyDB</span></div></header>
+  <main class="container">
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+      {% if mensajes %}{% for categoria, mensaje in mensajes %}
+        <div class="alert alert-{{ categoria }}" role="alert">{{ mensaje }}</div>
+      {% endfor %}{% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="container footer">Gestor de biblioteca · Proyecto académico</footer>
+</body>
+</html>

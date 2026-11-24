@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}{{ titulo_pagina }} | Biblioteca KeyDB{% endblock %}
+{% block content %}
+  <a class="back" href="{{ url_for('inicio') }}">← Volver al catálogo</a>
+  <div class="form-panel"><div class="eyebrow">GESTIÓN DE LIBROS</div><h1>{{ titulo_pagina }}</h1><p>Completa todos los campos para guardar los datos en KeyDB.</p>
+    <form method="post" action="{{ url_for(accion, id_libro=id_libro) if accion == 'editar_libro' else url_for(accion) }}" class="book-form">
+      <label>Título<input name="titulo" required maxlength="200" value="{{ libro.get('titulo', '') }}" placeholder="Ej. Cien años de soledad"></label>
+      <label>Autor<input name="autor" required maxlength="200" value="{{ libro.get('autor', '') }}" placeholder="Ej. Gabriel García Márquez"></label>
+      <label>Género<input name="genero" required maxlength="100" value="{{ libro.get('genero', '') }}" placeholder="Ej. Novela"></label>
+      <label>Estado de lectura<select name="estado" required><option value="no leído" {{ 'selected' if libro.get('estado', 'no leído') == 'no leído' else '' }}>No leído</option><option value="leído" {{ 'selected' if libro.get('estado') == 'leído' else '' }}>Leído</option></select></label>
+      <div class="form-actions"><a class="btn quiet" href="{{ url_for('inicio') }}">Cancelar</a><button class="btn primary" type="submit">Guardar libro</button></div>
+    </form>
+  </div>
+{% endblock %}
